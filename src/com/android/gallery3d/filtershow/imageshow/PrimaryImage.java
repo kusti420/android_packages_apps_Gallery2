@@ -54,7 +54,9 @@ public class PrimaryImage implements RenderingRequestCaller {
     private boolean DEBUG  = false;
     private static final boolean DISABLEZOOM = false;
     public static final int SMALL_BITMAP_DIM = 160;
-    public static final int MAX_BITMAP_DIM = 900;
+    // IchthysOS: raised from 900 — the editing preview was blurry on modern screens.
+    // The saved image always uses full resolution regardless of this cap.
+    public static final int MAX_BITMAP_DIM = 4096;
     private static PrimaryImage sPrimaryImage = null;
 
     private boolean mSupportsHighRes = false;

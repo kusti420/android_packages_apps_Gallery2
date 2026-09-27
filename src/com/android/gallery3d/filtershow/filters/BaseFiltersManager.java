@@ -55,9 +55,7 @@ public abstract class BaseFiltersManager implements FiltersManagerInterface {
                         addRepresentation(rep);
                     }
                 }
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -272,20 +270,26 @@ public abstract class BaseFiltersManager implements FiltersManagerInterface {
         }
     }
 
+    private void addIfNonNull(ArrayList<FilterRepresentation> list, FilterRepresentation rep) {
+        if (rep != null) {
+            list.add(rep);
+        }
+    }
+
     public void addEffects() {
-        mEffects.add(getRepresentation(ImageFilterTinyPlanet.class));
-        mEffects.add(getRepresentation(ImageFilterWBalance.class));
-        mEffects.add(getRepresentation(ImageFilterExposure.class));
-        mEffects.add(getRepresentation(ImageFilterContrast.class));
-        mEffects.add(getRepresentation(ImageFilterShadows.class));
-        mEffects.add(getRepresentation(ImageFilterHighlights.class));
-        mEffects.add(getRepresentation(ImageFilterVibrance.class));
-        mEffects.add(getRepresentation(ImageFilterCurves.class));
-        mEffects.add(getRepresentation(ImageFilterHue.class));
-        mEffects.add(getRepresentation(ImageFilterBwFilter.class));
-        mEffects.add(getRepresentation(ImageFilterNegative.class));
-        mEffects.add(getRepresentation(ImageFilterEdge.class));
-        mEffects.add(getRepresentation(ImageFilterKMeans.class));
+        addIfNonNull(mEffects, getRepresentation(ImageFilterTinyPlanet.class));
+        addIfNonNull(mEffects, getRepresentation(ImageFilterWBalance.class));
+        addIfNonNull(mEffects, getRepresentation(ImageFilterExposure.class));
+        addIfNonNull(mEffects, getRepresentation(ImageFilterContrast.class));
+        addIfNonNull(mEffects, getRepresentation(ImageFilterShadows.class));
+        addIfNonNull(mEffects, getRepresentation(ImageFilterHighlights.class));
+        addIfNonNull(mEffects, getRepresentation(ImageFilterVibrance.class));
+        addIfNonNull(mEffects, getRepresentation(ImageFilterCurves.class));
+        addIfNonNull(mEffects, getRepresentation(ImageFilterHue.class));
+        addIfNonNull(mEffects, getRepresentation(ImageFilterBwFilter.class));
+        addIfNonNull(mEffects, getRepresentation(ImageFilterNegative.class));
+        addIfNonNull(mEffects, getRepresentation(ImageFilterEdge.class));
+        addIfNonNull(mEffects, getRepresentation(ImageFilterKMeans.class));
     }
 
     public void addTools(Context context) {
@@ -322,8 +326,8 @@ public abstract class BaseFiltersManager implements FiltersManagerInterface {
             mTools.add(geometry);
         }
 
-        //mTools.add(getRepresentation(ImageFilterRedEye.class));
-        mTools.add(getRepresentation(ImageFilterDraw.class));
+        //addIfNonNull(mTools, getRepresentation(ImageFilterRedEye.class));
+        addIfNonNull(mTools, getRepresentation(ImageFilterDraw.class));
     }
 
     public void removeRepresentation(ArrayList<FilterRepresentation> list,
@@ -339,8 +343,12 @@ public abstract class BaseFiltersManager implements FiltersManagerInterface {
 
     public void setFilterResources(Resources resources) {
         ImageFilterBorder filterBorder = (ImageFilterBorder) getFilter(ImageFilterBorder.class);
-        filterBorder.setResources(resources);
+        if (filterBorder != null) {
+            filterBorder.setResources(resources);
+        }
         ImageFilterFx filterFx = (ImageFilterFx) getFilter(ImageFilterFx.class);
-        filterFx.setResources(resources);
+        if (filterFx != null) {
+            filterFx.setResources(resources);
+        }
     }
 }

@@ -1,3 +1,8 @@
+# IchthysOS: filter subclasses are instantiated via reflection in BaseFiltersManager.init()
+-keep class * extends com.android.gallery3d.filtershow.filters.ImageFilter {
+  <init>(...);
+}
+
 # Disable the warnings of using dynamic method call in common library.
 -dontnote com.android.gallery3d.common.*
 

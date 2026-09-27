@@ -461,6 +461,7 @@ public class FilterShowActivity extends FragmentActivity implements OnItemClickL
         }
         mCategoryFiltersAdapter = new CategoryAdapter(this);
         for (FilterRepresentation representation : filtersRepresentations) {
+            if (representation == null) continue;
             if (representation.getTextId() != 0) {
                 representation.setName(getString(representation.getTextId()));
             }
@@ -477,6 +478,7 @@ public class FilterShowActivity extends FragmentActivity implements OnItemClickL
         mCategoryGeometryAdapter = new CategoryAdapter(this);
         boolean found = false;
         for (FilterRepresentation representation : filtersRepresentations) {
+            if (representation == null) continue;
             mCategoryGeometryAdapter.add(new Action(this, representation));
             if (representation instanceof FilterDrawRepresentation) {
                 found = true;
